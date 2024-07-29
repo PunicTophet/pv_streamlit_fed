@@ -6,21 +6,20 @@ import os
 import re
 import openai
 import json
-
+from pinecone import Pinecone
 # Configuration
 
 
-client = openai.OpenAI(api_key=openai_api_key)
-container_name = "fed-coa-opinions"
+client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
-pc = pinecone.Pinecone(api_key=pinecone_api_key)
+pc = pinecone.Pinecone(api_key=PINECONE_API_KEY)
 pc_index = pc.Index("coa-query-2")
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
-blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
 
 # Create the container client
-container_client = blob_service_client.get_container_client(container_name)
+container_client = blob_service_client.get_container_client("fed-coa-opinions")
 
 def get_blob_data(id):
     # Remove .pdf_\d\d ending and replace with .json
