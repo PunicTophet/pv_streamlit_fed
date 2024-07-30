@@ -1,4 +1,5 @@
 import streamlit as st
+!pip install -r r3.txt
 import pinecone
 from sentence_transformers import SentenceTransformer
 from azure.storage.blob import BlobServiceClient
